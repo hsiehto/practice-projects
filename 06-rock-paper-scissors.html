@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+  <title>rock-paper-scissors</title> 
+    <body>
+      <p>
+        Rock Paper Scissors
+      </p>
+      <button onclick="
+        if (randomMove() === 'paper') {
+          alert('rock vs paper, you lose!')
+        } else if (randomMove() === 'rock') {
+          alert('rock vs rock, its a draw!')
+        } else {
+          alert('rock vs scissors, you win!')
+        }
+      ">Rock</button>
+      <button onclick="
+        if (randomMove() === 'paper') {
+          alert('paper vs paper, its a draw!')
+        } else if (randomMove() === 'rock') {
+          alert('paper vs rock, you win!')
+        } else {
+          alert('paper vs scissors, you lose!')
+        }
+      ">Paper</button>
+      <button onclick="
+        if (randomMove() === 'paper') {
+          alert('scissors vs paper, you win!')
+        } else if (randomMove() === 'rock') {
+          alert('scissors vs rock, you lose!')
+        } else {
+          alert('scissors vs scissors, its a draw!')
+        }
+      ">Scissors</button>
+      <script>
+        // computer randomly selects a move
+        function randomMove() {
+          const randomNumber = Math.floor(Math.random() * 3)
+          if (randomNumber === 0) {
+            return "rock"
+          } else if (randomNumber === 1) {
+            return "paper"
+          } else {
+            return "scissors"
+          }
+        }
+        // compare the moves to get the result
+        // display the result in a popup
+
+        // any variable created inside the curly brackets, will only exist inside
+      </script>
+    </body>
+  </head>
+</html>
+
