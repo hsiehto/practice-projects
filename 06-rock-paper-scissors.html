@@ -7,50 +7,43 @@
         Rock Paper Scissors
       </p>
       <button onclick="
-        if (randomMove() === 'paper') {
-          alert('rock vs paper, you lose!')
-        } else if (randomMove() === 'rock') {
-          alert('rock vs rock, its a draw!')
-        } else {
-          alert('rock vs scissors, you win!')
-        }
+        checkMove('Rock')
       ">Rock</button>
       <button onclick="
-        if (randomMove() === 'paper') {
-          alert('paper vs paper, its a draw!')
-        } else if (randomMove() === 'rock') {
-          alert('paper vs rock, you win!')
-        } else {
-          alert('paper vs scissors, you lose!')
-        }
+        checkMove('Paper')
       ">Paper</button>
       <button onclick="
-        if (randomMove() === 'paper') {
-          alert('scissors vs paper, you win!')
-        } else if (randomMove() === 'rock') {
-          alert('scissors vs rock, you lose!')
-        } else {
-          alert('scissors vs scissors, its a draw!')
-        }
+        checkMove('Scissors')
       ">Scissors</button>
       <script>
         // computer randomly selects a move
         function randomMove() {
           const randomNumber = Math.floor(Math.random() * 3)
           if (randomNumber === 0) {
-            return "rock"
+            return "Rock"
           } else if (randomNumber === 1) {
-            return "paper"
+            return "Paper"
           } else {
-            return "scissors"
+            return "Scissors"
           }
         }
-        // compare the moves to get the result
-        // display the result in a popup
-
-        // any variable created inside the curly brackets, will only exist inside
+        function checkMove (playerMove) {
+          // compare the moves to get the result
+          // display the result in a popup
+          // any variable created inside the curly brackets, will only exist inside
+          const cpuMove = randomMove();
+          if (playerMove === cpuMove) {
+            alert(`${playerMove} vs ${cpuMove}, draw!`)
+          // develop win conditions
+          } else if (playerMove === 'Rock' && cpuMove === "Scissors" ||
+          playerMove === "Paper" && cpuMove === "Rock" || playerMove === "Scissors" && cpuMove === "Paper") {
+            alert(`${playerMove} vs ${cpuMove}, win!`)
+          // develop lose conditions
+          } else {
+            alert(`${playerMove} vs ${cpuMove}, lose!`)
+          }
+        }
       </script>
     </body>
   </head>
 </html>
-
