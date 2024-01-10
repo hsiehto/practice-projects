@@ -15,7 +15,19 @@
       <button onclick="
         checkMove('Scissors')
       ">Scissors</button>
+      <button onclick="
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+      ">Reset Score</button>
+
       <script>
+        const score = {
+          wins: 0,
+          losses: 0,
+          ties: 0
+        }
+
         // computer randomly selects a move
         function randomMove() {
           const randomNumber = Math.floor(Math.random() * 3)
@@ -31,17 +43,25 @@
           // compare the moves to get the result
           // display the result in a popup
           // any variable created inside the curly brackets, will only exist inside
+          // store in variable or randomMove will update to new random number each time its called
           const cpuMove = randomMove();
           if (playerMove === cpuMove) {
-            alert(`${playerMove} vs ${cpuMove}, draw!`)
+            score.ties += 1
+            alert(`${playerMove} vs ${cpuMove}, draw!
+Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
           // develop win conditions
           } else if (playerMove === 'Rock' && cpuMove === "Scissors" ||
           playerMove === "Paper" && cpuMove === "Rock" || playerMove === "Scissors" && cpuMove === "Paper") {
-            alert(`${playerMove} vs ${cpuMove}, win!`)
+            score.wins += 1
+            alert(`${playerMove} vs ${cpuMove}, win!
+Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
           // develop lose conditions
           } else {
-            alert(`${playerMove} vs ${cpuMove}, lose!`)
+            score.losses += 1
+            alert(`${playerMove} vs ${cpuMove}, lose!
+Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
           }
+          console.log(score)
         }
       </script>
     </body>
