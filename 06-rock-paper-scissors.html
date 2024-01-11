@@ -22,11 +22,7 @@
       ">Reset Score</button>
 
       <script>
-        const score = {
-          wins: 0,
-          losses: 0,
-          ties: 0
-        }
+        const score = JSON.parse(localStorage.getItem('score'))
 
         // computer randomly selects a move
         function randomMove() {
@@ -61,9 +57,16 @@ Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
             alert(`${playerMove} vs ${cpuMove}, lose!
 Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
           }
-          console.log(score)
+          localStorage.setItem('score', JSON.stringify(score))
         }
+        /* 1/11/2024 
+        After we update our score, we're going to save it in local save
+        it in localStorage.setItem. localStorage only supports strings, convert our
+        score object into JSON string, using JSON.stringify. We then update our score
+        variable with the updated object. */
+
       </script>
     </body>
   </head>
 </html>
+
