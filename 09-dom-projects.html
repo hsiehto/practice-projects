@@ -10,8 +10,19 @@
         Subscribe
       </button>
 
+      <p>Amazon Shipping Calculator</p>
+      <input placeholder="Cost of order" 
+      class="js-cost-input" onkeydown="
+        // why can we use JS here
+        handleCostKeyDown(event)
+      ">
+      <button onclick="
+      calculateTotal();
+      ">Calculate</button>
+      <p class="js-total-cost"></p>
+
       <script>
-        /*
+        /* Youtube Subscribe Button Algo
         if text is 'subscribe' change it to 'subscribed'
         else change back to 'subscribe'
         */
@@ -23,6 +34,33 @@
           buttonElement.innerHTML = 'Subscribe'
         }
        }
+       /* Amazon Shipping Calculator Algo
+       when we click button:
+       1. get the text in text box
+       2. if amount < $40, add $10 shipping cost
+       3. display total on page
+       when we press a key:
+       1. check if key is 'enter'
+       2. if yes, do same thing as calculate button
+       */
+      function calculateTotal() {
+        const inputElement = document.querySelector('.js-cost-input');
+        // for input elements, there is no HTML inside. We use a different property, .value
+        // can also use String() or Number()
+        let cost = parseInt(inputElement.value);
+        if (cost <= 40) {
+          cost = cost + 10;
+        }
+        document.querySelector('.js-total-cost')
+          .innerHTML = `$${cost}` ;
+        // clicks, keydowns are known as "events"
+        // onclick, onkeydown are known as "event listeners"
+      }
+      function handleCostKeyDown(event) {
+        if (event.key === 'Enter') {
+          calculateTotal();
+        }
+      }
       </script>
     </body>
   </head>
