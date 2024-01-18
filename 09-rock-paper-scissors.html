@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+  <title>rock-paper-scissors</title> 
+    <body>
+      <p>
+        Rock Paper Scissors
+      </p>
+      <button onclick="
+        checkMove('Rock')
+      ">Rock</button>
+      <button onclick="
+        checkMove('Paper')
+      ">Paper</button>
+      <button onclick="
+        checkMove('Scissors')
+      ">Scissors</button>
+
+      <p class="js-result"></p>
+      <p class="js-move"></p>
+      <p class="js-score"></p>
+
+      <button onclick="
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        updateScoreElement();
+      ">Reset Score</button>
+
+      <script>
+        const score = JSON.parse(localStorage.getItem('score'))
+        // computer randomly selects a move
+        function randomMove() {
+          const randomNumber = Math.floor(Math.random() * 3)
+          if (randomNumber === 0) {
+            return "Rock"
+          } else if (randomNumber === 1) {
+            return "Paper"
+          } else {
+            return "Scissors"
+          }
+        }
+
+        updateScoreElement();
+
+        function checkMove (playerMove) {
+          // compare the moves to get the result
+          // display the result in a popup
+          // any variable created inside the curly brackets, will only exist inside
+          // store in variable or randomMove will update to new random number each time its called
+          let result = '';
+          const cpuMove = randomMove();
+          if (playerMove === cpuMove) {
+            score.ties += 1
+            result = 'DRAW!';
+//             alert(`${playerMove} vs ${cpuMove}, ${result}!
+// Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
+          
+          // develop win conditions
+          } else if (playerMove === 'Rock' && cpuMove === "Scissors" ||
+          playerMove === "Paper" && cpuMove === "Rock" || playerMove === "Scissors" && cpuMove === "Paper") {
+            score.wins += 1
+            result = 'WIN!';
+//             alert(`${playerMove} vs ${cpuMove}, ${result}!
+// Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
+          // develop lose conditions
+          } else {
+            score.losses += 1
+            result = 'LOSE!';
+//             alert(`${playerMove} vs ${cpuMove}, ${result}!
+// Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
+          }
+          localStorage.setItem('score', JSON.stringify(score))
+          updateScoreElement();
+
+          document.querySelector('.js-result')
+          .innerHTML = result;
+
+          document.querySelector('.js-move')
+          .innerHTML = `Player: ${playerMove} - Computer: ${cpuMove}` 
+        }
+
+        function updateScoreElement() {
+          document.querySelector('.js-score')
+          .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`
+        }
+
+        /* 1/11/2024 
+        After we update our score, we're going to save it in local save
+        it in localStorage.setItem. localStorage only supports strings, convert our
+        score object into JSON string, using JSON.stringify. We then update our score
+        variable with the updated object. */
+
+      </script>
+    </body>
+  </head>
+</html>
+
