@@ -14,6 +14,7 @@ const score = JSON.parse(localStorage.getItem('score'))
       updateScoreElement();
 
       function checkMove(playerMove) {
+        
         // compare the moves to get the result
         // display the result in a popup
         // any variable created inside the curly brackets, will only exist inside
@@ -27,7 +28,7 @@ const score = JSON.parse(localStorage.getItem('score'))
 // Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`)
         
         // develop win conditions
-        } else if (playerMove === 'Rock' && cpuMove === "Scissors" ||
+        } else if (playerMove === "Rock" && cpuMove === "Scissors" ||
         playerMove === "Paper" && cpuMove === "Rock" || playerMove === "Scissors" && cpuMove === "Paper") {
           score.wins += 1
           result = 'WIN!';
@@ -65,7 +66,7 @@ const score = JSON.parse(localStorage.getItem('score'))
 
       function autoPlay() {
         if (!isAutoPlaying) {
-          intervalId = setInterval(function() {
+          intervalId = setInterval(() => {
             const playerMove = randomMove();
             checkMove(playerMove);
           }, 1000);
@@ -76,6 +77,9 @@ const score = JSON.parse(localStorage.getItem('score'))
         }
       }
 
+      document.querySelector('.js-rock-button').addEventListener('click', () => checkMove('Rock'))
+      document.querySelector('.js-paper-button').addEventListener('click', () => checkMove('Paper'))
+      document.querySelector('.js-scissors-button').addEventListener('click', () => checkMove('Scissors'))
       /* 1/11/2024 
       After we update our score, we're going to save it in local save
       it in localStorage.setItem. localStorage only supports strings, convert our
