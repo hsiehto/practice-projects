@@ -80,6 +80,15 @@ const score = JSON.parse(localStorage.getItem('score'))
       document.querySelector('.js-rock-button').addEventListener('click', () => checkMove('Rock'))
       document.querySelector('.js-paper-button').addEventListener('click', () => checkMove('Paper'))
       document.querySelector('.js-scissors-button').addEventListener('click', () => checkMove('Scissors'))
+      document.body.addEventListener('keydown', (event) => {
+        if (event.key === 'r') {
+          checkMove('Rock')
+        } else if (event.key === 'p') {
+          checkMove('Paper')
+        } else if (event.key === 's') {
+          checkMove('Scissors')
+        }
+      })
       /* 1/11/2024 
       After we update our score, we're going to save it in local save
       it in localStorage.setItem. localStorage only supports strings, convert our

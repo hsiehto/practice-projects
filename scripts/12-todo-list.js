@@ -21,6 +21,11 @@ const todoList = [{
  name: 'item 2',
  dueDate: '2023-01-05'
 }];
+
+document.querySelector('.js-add-todo-button').addEventListener('click', () => {
+  addTodo();
+})
+
 function addTodo() {
   // this gets an element with the class js-name-input
   const inputElement = document.querySelector('.js-name-input');
@@ -57,12 +62,17 @@ function renderTodoList() {
     const html = `
     <div>${name}</div>
     <div>${dueDate}</div>
-    <button onclick="
-      todoList.splice(${index},1);
-      renderTodoList();
-    " class="delete-todo-button">Delete</button> 
+    <button class="delete-todo-button
+    js-delete-todo-button">Delete</button> 
     `;
     todoListHTML += html;
   });
   document.querySelector('.js-todo-list').innerHTML = todoListHTML;
+  // list
+  document.querySelectorAll('.js-delete-todo-button').forEach((deleteButton, index)=>{
+    deleteButton.addEventListener('click', ()=> {
+      todoList.splice(index,1);
+      renderTodoList();
+    });
+  });
 }
